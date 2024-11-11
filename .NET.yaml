@@ -1,0 +1,15 @@
+trigger:
+- main  # This specifies the branch to trigger builds on
+
+pool:
+  vmImage: 'ubuntu-latest'  # Define the build agent
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.x'  # Specify .NET version
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- script: dotnet build --configuration Release
+  displayName: 'Build Project'
